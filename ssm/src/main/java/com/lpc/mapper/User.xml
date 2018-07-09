@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lpc.mapper.UserMapper">
+    
+    <resultMap id="houseAndhost" type="House">
+        <id column="id" property="id"/>
+        <result column="address" property="address"/>
+        <!--property为House中的属性
+            如果select在其他Mapper中，需要加上前缀
+            column为查询时需要用到的House表中的列-->
+        <association property="host" javaType="Host" column="hid" select="findHostById"/>
+    </resultMap>
+
+    <!-- 返回自定义的映射，需要写resultMap而不是resultType-->
+    <select id="findHouseAndHostLazyLoading" resultMap="houseAndhost">
+        SELECT * from house
+    </select>
+
+    <select id="findHostById" resultType="Host">
+        select * from host where hid = #{hid}
+    </select>
+
+    <settings>
+        <!-- 打开延迟加载 的开关 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 将积极加载改为消极加载即按需要加载 -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+        <!-- 开启二级缓存 -->
+        <!-- <setting name="cacheEnabled" value="true"/>-->
+    </settings>
+
+</mapper>

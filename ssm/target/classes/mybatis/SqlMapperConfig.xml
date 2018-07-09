@@ -1,0 +1,15 @@
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+
+    <!-- 定义 别名 -->
+    <typeAliases>
+        <!-- 批量定义别名 指定包路径，自动扫描包下的POJO  别名默认为类名-->
+        <package name="com.lpc.po"/>
+    </typeAliases>
+
+    <!-- 配置数据源 事务等 因为与Spring整合 这里不再配置 -->
+    <!-- 扫描 Mapper 因为配置了Spring和mybatis的整合包，所以不再配置-->
+
+</configuration>
